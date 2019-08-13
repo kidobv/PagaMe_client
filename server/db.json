@@ -1,0 +1,16 @@
+{
+  "expenses": [
+    {
+      "title": "ichiban",
+      "description": "paid 32$",
+      "userId": "117636597251114231417",
+      "id": 3
+    },
+    {
+      "title": "publix sunday groceries",
+      "description": "Kidany own 50$",
+      "userId": "117636597251114231417",
+      "id": 4
+    }
+  ]
+}

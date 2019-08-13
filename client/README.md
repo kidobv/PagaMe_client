@@ -1,0 +1,1 @@
+This project uses React Redux and forms to allow users to add expenses keep track of their history and split with a requested user.
