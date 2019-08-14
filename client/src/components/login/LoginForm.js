@@ -51,7 +51,7 @@ class LoginForm extends React.Component {
                             <Field name="email" type="email" icon="user" component={this.renderInput} placeholder="E-mail address" />
                         </div>
                         <div className="field">
-                            <Field name="password" type="Password" icon="lock" component={this.renderInput} placeholder="Password" />
+                            <Field name="password" type="password" icon="lock" component={this.renderInput} placeholder="Password" />
                         </div>
                     </div>
                     <div className="ui fluid large teal submit button">Login</div> 
@@ -61,8 +61,8 @@ class LoginForm extends React.Component {
                 </div>
                 <div className="ui horizontal divider">
                     Or
-                    </div>
-                <div className="row justify-content-md-center"><GoogleAuth/></div>
+                </div>
+                <div className="row justify-content-center"><GoogleAuth/></div>
                 
             </div>
 

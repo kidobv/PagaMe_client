@@ -1,25 +1,41 @@
 import React from 'react';
+import history from '../../history'
 import { connect } from 'react-redux';
 import { createExpense } from '../../actions';
 import ExpenseForm from './ExpenseForm';
 
 class ExpenseCreate extends React.Component {
 
+    componentDidMount = () => {
+        if (this.props.isSignedIn !== true) {           
+            history.push('/login');
+        }
+    }
   
     onSubmit = (formValues) => {
-        this.props.createExpense(formValues);
+        if(formValues.requestee){
+            this.props.createExpense(formValues);
+        } 
+         else{
+            formValues.requestee = this.props.usrProfile.email; 
+            this.props.createExpense(formValues);
+         }
     }
 
     render() {
         return (
             <div>
-                <h3>Create a Expense</h3>
+                <h3>Create an Expense</h3>
                 <ExpenseForm onSubmit = {this.onSubmit} />
             </div>
             
         );
     };
 };
-
-
-export default connect(null, { createExpense })(ExpenseCreate);
+const mapStateToProps = state => {
+    return {
+        isSignedIn: state.auth.isSignedIn,
+        usrProfile: state.auth.usrProfile
+    }
+}
+export default connect(mapStateToProps, { createExpense })(ExpenseCreate);

@@ -5,6 +5,7 @@ import { SIGN_IN, SIGN_OUT,
     CREATE_EXPENSE,
     FETCH_EXPENSES, FETCH_EXPENSE} from "./types";
 
+
 export const signIn = (authInstance) =>{
     //.currentUser.get().getBasicProfile()
     //needs to handle case where profile doesn't load
@@ -32,8 +33,13 @@ export const signOut = () => {
 export const createExpense = (formValues) =>{
     //we need to set a handle on the response that we get form the post, we will be getting the record that was created
     return async (dispatch, getState) =>{
-        const { userId } = getState().auth.usrProfile;
-        const response = await expenses.post('/expenses', {...formValues, userId}); //here we are taking all the objects inside formValues and adding the userId
+        
+        var d = new Date()
+        // var monthname = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const date = d.getMonth() + " " + d.getDate() + ", " + d.getFullYear();
+            
+        const { email, userId } = getState().auth.usrProfile;
+        const response = await expenses.post('/expenses', { ...formValues, email, userId, date}); //here we are taking all the objects inside formValues and adding the userId
         dispatch(
            {
                type: CREATE_EXPENSE,

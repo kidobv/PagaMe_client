@@ -8,7 +8,6 @@ import { signIn, getEmail } from "../../actions";
 class Login extends React.Component {
 
     componentDidMount() {
-        console.log(this.props.isSignedIn);
         if (this.props.isSignedIn === true) {
             history.push("/")
         }
@@ -16,13 +15,11 @@ class Login extends React.Component {
 
     render() {
         return (
-
-            <div className="row justify-content-md-center ">
+            <div className="row justify-content-md-center" style={{marginTop:'20px'}}>
                 <div className="col-md-8 col-sm-10 col-xs-12">
                     <LoginForm onSubmit={this.onSubmit} />
                 </div>
             </div>
-
         );
     };
 }

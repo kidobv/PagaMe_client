@@ -1,16 +1,63 @@
 {
   "expenses": [
     {
-      "title": "ichiban",
-      "description": "paid 32$",
+      "description": "Kidany own 50$",
+      "amount": "50.00",
+      "email": "kidobv@gmail.com",
       "userId": "117636597251114231417",
+      "date": "Aug/13/2019",
+      "requestee": "kidobv@gmail.com",
+      "id": 1
+    },
+    {
+      "description": "Amelia gimme 20",
+      "amount": "20.00",
+      "email": "kidobv@gmail.com",
+      "userId": "117636597251114231417",
+      "date": "Aug/13/2019",
+      "requestee": "thisisnotamelia@gmail.com",
+      "id": 2
+    },
+    {
+      "description": "Kidany pay me 40$ from publix",
+      "amount": "40",
+      "email": "kidobv@gmail.com",
+      "userId": "117636597251114231417",
+      "date": "7 14, 2019",
       "id": 3
     },
     {
-      "title": "publix sunday groceries",
-      "description": "Kidany own 50$",
+      "description": "rent July",
+      "amount": "700.89",
+      "email": "kidobv@gmail.com",
       "userId": "117636597251114231417",
+      "date": "7 14, 2019",
       "id": 4
+    },
+    {
+      "description": "electric bill",
+      "amount": "560",
+      "email": "kidobv@gmail.com",
+      "userId": "117636597251114231417",
+      "date": "7 14, 2019",
+      "id": 5
+    },
+    {
+      "description": "potty pads",
+      "amount": "34",
+      "requestee": "kidobv@gmail.com",
+      "email": "kidobv@gmail.com",
+      "userId": "117636597251114231417",
+      "date": "7 14, 2019",
+      "id": 6
+    }
+  ],
+  "users": [
+    {
+      "fullName": "Kidany Berrios",
+      "email": "kidobv@gmail.com",
+      "password": "pagame!",
+      "id": 1
     }
   ]
 }

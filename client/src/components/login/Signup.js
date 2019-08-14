@@ -7,16 +7,10 @@ import { signIn, createUser, getEmail } from "../../actions";
 
 class Signup extends React.Component {
 
-    componentDidMount() {
-        console.log(this.props.isSignedIn);
-        if (this.props.isSignedIn === true) {
-            this.props.fetchExpenses();
-        }
-        else {
-            history.push('/login');
-        }
+    onSubmit(){
+        //create User action creator
     }
-
+    
     render() {
         return (
             <div className="ui container">
