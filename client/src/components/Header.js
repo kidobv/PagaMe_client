@@ -33,8 +33,15 @@ class Header extends React.Component {
                     </li>
                     <li className="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent">
                         <h5 className="nav-link">
-                            <Link to="/expenses/new" >
-                                Create
+                            <Link to="/expenses/add" >
+                                Add Expense
+                            </Link>
+                        </h5>
+                    </li>
+                    <li className="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent">
+                        <h5 className="nav-link">
+                            <Link to="/expenses/request" >
+                                Request Expense
                             </Link>
                         </h5>
                     </li>

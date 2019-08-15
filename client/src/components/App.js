@@ -18,7 +18,8 @@ const App = () => {
                     {/* exact prop by itself means exact = {ture} */}                    
                     <Route path="/login" exact component={Login} />
                     <Route path="/" exact component={ExpenseList} />
-                    <Route path="/expenses/new" exact component={ExpenseCreate} />
+                    <Route path="/expenses/add" exact component={ExpenseCreate} />
+                    <Route path="/expenses/request" exact component={ExpenseCreate} />
                 </div>            
            
             </Router>

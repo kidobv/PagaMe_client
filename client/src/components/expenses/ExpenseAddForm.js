@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form'
 
-class ExpenseForm extends React.Component {
+class ExpenseAddForm extends React.Component {
 
     state = {errors:{}}
 
@@ -32,16 +32,18 @@ class ExpenseForm extends React.Component {
         console.log(formValues)
         this.props.onSubmit(formValues);
     }
+    onExpenseRequest = () =>{
+
+    }
 
     render() {
         return (//onSubmit with redux forms handler -- also un semamntic UI if we don't specify the error class inside the form className the errors are going to be hidden by default
             <div>
                 <form onSubmit={this.props.handleSubmit(this.onExpenseSubmit)} className="ui form error">
                     <Field name="description" component={this.renderInput} label="Enter Description" />
-                    <Field name="amount" component={this.renderInput} label="Enter Amount" />
+                    <Field name="amount" component={this.renderInput} label="Enter Amount" /> 
                     <button className="ui button primary">Add to my history</button>
-                </form>
-                <button className="ui positive button">Request someone</button>
+                </form>                
             </div>
             
         );
@@ -58,10 +60,13 @@ const validate = (formValues) => {
     if (!formValues.amount) {
         errors.amount = "You must enter an amount";
     }
+    if (!formValues.requestee) {
+        errors.requestee = "You must enter an amount";
+    }
     return errors
 }
 
 export default reduxForm({ //reduxForm is very similar to connect except it takes only one argument {}
     form: 'expense form',
     validate: validate    
-})(ExpenseForm);
+})(ExpenseAddForm);

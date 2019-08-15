@@ -33,11 +33,12 @@ export const signOut = () => {
 export const createExpense = (formValues) =>{
     //we need to set a handle on the response that we get form the post, we will be getting the record that was created
     return async (dispatch, getState) =>{
-        
+        //tweek to remove posible $ entires
+        formValues.amount = formValues.amount.replace("$","");
+        //format the date to be added to the expense record
         var d = new Date()
-        // var monthname = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const date = d.getMonth() + " " + d.getDate() + ", " + d.getFullYear();
-            
+        var monthname = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const date = monthname[d.getMonth()] + "/" + d.getDate() + "/" + d.getFullYear();            
         const { email, userId } = getState().auth.usrProfile;
         const response = await expenses.post('/expenses', { ...formValues, email, userId, date}); //here we are taking all the objects inside formValues and adding the userId
         dispatch(

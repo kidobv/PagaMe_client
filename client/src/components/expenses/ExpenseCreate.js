@@ -2,7 +2,9 @@ import React from 'react';
 import history from '../../history'
 import { connect } from 'react-redux';
 import { createExpense } from '../../actions';
-import ExpenseForm from './ExpenseForm';
+import ExpenseAddForm from './ExpenseAddForm';
+import ExpenseRequestForm from './ExpenseRequestForm';
+
 
 class ExpenseCreate extends React.Component {
 
@@ -23,12 +25,16 @@ class ExpenseCreate extends React.Component {
     }
 
     render() {
-        return (
+        return (this.props.location.pathname === "/expenses/add" ?
             <div>
                 <h3>Create an Expense</h3>
-                <ExpenseForm onSubmit = {this.onSubmit} />
-            </div>
-            
+                <ExpenseAddForm onSubmit={this.onSubmit} />
+            </div> 
+            :
+            <div>
+                <h3>Request an Expense</h3>
+                <ExpenseRequestForm onSubmit={this.onSubmit} />
+            </div>            
         );
     };
 };

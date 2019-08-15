@@ -14,32 +14,10 @@ class ExpenseList extends React.Component {
             history.push('/login');
         }
     }
-    // renderAdmin(expense) {
-    //     if (expense.userId === this.props.currentUserId) {
-    //         return (
-    //             <div className="right floated content">
-    //                 <Link to={`/expenses/edit/${expense.id}`} className="ui button primary">
-    //                     Edit
-    //                 </Link>
-    //                 <button className="ui button negative">
-    //                     Delete
-    //                 </button>
-    //             </div>
-    //         );
-    //     }
-    // };
-
 
     renderList() {
         return this.props.expenses.map(expense => {
             return (
-                // <div className="item" key={expense.id}>
-                //     <i className="large middle aligned icon camera" />
-                //     <div className="content">
-                //         {expense.title}
-                //         <div className="description">{expense.description}</div>
-                //     </div>
-                // </div>
                 <tr key={expense.id}>
                     <td>{expense.description}</td>
                     <td><h4>${expense.amount}</h4></td>
@@ -53,11 +31,18 @@ class ExpenseList extends React.Component {
     renderCreateBtn() {
         if (this.props.isSignedIn) {
             return (
-                <div style={{ textAlign: 'right' , marginBottom:'10px'}}>
-                    <Link to="/expenses/new" className="ui  button primary">
-                        Create Expense
-                    </Link>
+                <div style={{ textAlign: 'right', marginBottom: '10px' }}>
+                    <div className="ui buttons">
+                        <Link to="/expenses/add" className="ui  button primary">
+                            Add Expense
+                        </Link>
+                        <div className="or"></div>
+                        <Link to="/expenses/request" className="ui positive button">
+                            Request Expense
+                        </Link>
+                    </div>
                 </div>
+
             );
         }
     };

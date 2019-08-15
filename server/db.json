@@ -19,36 +19,39 @@
       "id": 2
     },
     {
-      "description": "Kidany pay me 40$ from publix",
-      "amount": "40",
-      "email": "kidobv@gmail.com",
-      "userId": "117636597251114231417",
-      "date": "7 14, 2019",
-      "id": 3
-    },
-    {
-      "description": "rent July",
-      "amount": "700.89",
-      "email": "kidobv@gmail.com",
-      "userId": "117636597251114231417",
-      "date": "7 14, 2019",
-      "id": 4
-    },
-    {
-      "description": "electric bill",
-      "amount": "560",
-      "email": "kidobv@gmail.com",
-      "userId": "117636597251114231417",
-      "date": "7 14, 2019",
-      "id": 5
-    },
-    {
-      "description": "potty pads",
-      "amount": "34",
+      "description": "Mika's pillow",
+      "amount": "42",
       "requestee": "kidobv@gmail.com",
       "email": "kidobv@gmail.com",
       "userId": "117636597251114231417",
-      "date": "7 14, 2019",
+      "date": "Aug/14/2019",
+      "id": 3
+    },
+    {
+      "description": "Amelia paid publix on Sunday",
+      "amount": "12",
+      "requestee": "kidobv@gmail.com",
+      "email": "kidobv@gmail.com",
+      "userId": "117636597251114231417",
+      "date": "Aug/14/2019",
+      "id": 4
+    },
+    {
+      "amount": "54",
+      "description": "expensive ass drinks",
+      "requestee": "kidobv@gmail.com",
+      "email": "kidobv@gmail.com",
+      "userId": "117636597251114231417",
+      "date": "Aug/14/2019",
+      "id": 5
+    },
+    {
+      "amount": "50",
+      "description": "test",
+      "requestee": "kidobv@gmail.com",
+      "email": "kidobv@gmail.com",
+      "userId": "117636597251114231417",
+      "date": "Aug/14/2019",
       "id": 6
     }
   ],
