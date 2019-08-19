@@ -27,7 +27,7 @@ class ExpenseCreate extends React.Component {
     render() {
         return (this.props.location.pathname === "/expenses/add" ?
             <div>
-                <h3>Create an Expense</h3>
+                <h3>Add an Expense</h3>
                 <ExpenseAddForm onSubmit={this.onSubmit} />
             </div> 
             :

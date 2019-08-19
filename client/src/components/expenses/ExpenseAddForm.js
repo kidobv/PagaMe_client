@@ -3,8 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 
 class ExpenseAddForm extends React.Component {
 
-    state = {errors:{}}
-
+   
     renderError({ error, touched }) {//distructured parameters from meta
         if (touched && error) {
             return (
@@ -29,7 +28,6 @@ class ExpenseAddForm extends React.Component {
     };
 
     onExpenseSubmit = (formValues) => {
-        console.log(formValues)
         this.props.onSubmit(formValues);
     }
     onExpenseRequest = () =>{

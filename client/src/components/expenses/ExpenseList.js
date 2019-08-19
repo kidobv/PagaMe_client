@@ -7,8 +7,10 @@ import { fetchExpenses } from '../../actions'
 class ExpenseList extends React.Component {
 
     componentDidMount = () => {
-        if (this.props.isSignedIn === true) {
-            this.props.fetchExpenses();
+        //Makes sure to only fetch expenses when the user is signed in and the expenses list hasn't been loaded yet
+        if (this.props.isSignedIn === true ) {
+            if (this.props.expenses.length === 0)
+            this.props.fetchExpenses(this.props.usrProfile.email);
         }
         else {
             history.push('/login');
@@ -17,11 +19,14 @@ class ExpenseList extends React.Component {
 
     renderList() {
         return this.props.expenses.map(expense => {
+            var monthname = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const d = new Date(expense.date)
+            const date = monthname[d.getMonth()] + "/" + d.getDate() + "/" + d.getFullYear();
             return (
-                <tr key={expense.id}>
+                <tr key={expense._id}>
                     <td>{expense.description}</td>
                     <td><h4>${expense.amount}</h4></td>
-                    <td>{expense.date}</td>
+                    <td>{date}</td>
                     <td>{expense.requestee}</td>
                 </tr>
             );
@@ -31,7 +36,7 @@ class ExpenseList extends React.Component {
     renderCreateBtn() {
         if (this.props.isSignedIn) {
             return (
-                <div style={{ textAlign: 'right', marginBottom: '10px' }}>
+                <div style={{ textAlign: 'right', marginBottom: '15px' }}>
                     <div className="ui buttons">
                         <Link to="/expenses/add" className="ui  button primary">
                             Add Expense

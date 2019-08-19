@@ -1,26 +1,53 @@
-import expenses from '../apis/expenses'
+import pagame from '../apis/pagame'
 import history from '../history'
+import swal from 'sweetalert'
 
-import { SIGN_IN, SIGN_OUT, 
-    CREATE_EXPENSE,
-    FETCH_EXPENSES, FETCH_EXPENSE} from "./types";
+import {
+    SIGN_IN, SIGN_OUT, CREATE_EXPENSE, FETCH_EXPENSES,
+    FETCH_EXPENSE
+} from "./types";
 
 
-export const signIn = (authInstance) =>{
-    //.currentUser.get().getBasicProfile()
-    //needs to handle case where profile doesn't load
+export const signIn = (authInstance) => {
+    //needs to handle case where profile doesn't load and authInstance is null
+
     const profile = authInstance.currentUser.get().getBasicProfile()
     const usrProfile = {
-                    userId: profile.getId(),
-                    fullName: profile.getName(),
-                    email: profile.getEmail()
-                }
+        userId: profile.getId(),
+        fullName: profile.getName(),
+        email: profile.getEmail()
+    }
     return {
         type: SIGN_IN,
         payload: usrProfile,
         instance: authInstance
     };
 };
+
+// Authentivate User in Backend
+export const authUser = (formValues) => {
+    return async (dispatch) => {
+        const response = await pagame.post('/users/find', { ...formValues })
+        const profile = response.data
+        if (response.data.fullName) {
+            const usrProfile = {
+                fullName: profile.fullName,
+                email: profile.email
+            }
+            dispatch({
+                type: SIGN_IN,
+                payload: usrProfile,
+                instance: null
+            });
+            history.push('/');
+        }
+        else {
+            //swal to handle error
+            swal("Not found", response.data, "warning");
+        }
+
+    }
+}
 
 export const signOut = () => {
     history.push('/login');
@@ -30,29 +57,29 @@ export const signOut = () => {
 };
 
 //this is using redux thunk therefore we will pass the dispatch function
-export const createExpense = (formValues) =>{
+export const createExpense = (formValues) => {
     //we need to set a handle on the response that we get form the post, we will be getting the record that was created
-    return async (dispatch, getState) =>{
+    return async (dispatch, getState) => {
         //tweek to remove posible $ entires
-        formValues.amount = formValues.amount.replace("$","");
+        formValues.amount = formValues.amount.replace("$", "");
         //format the date to be added to the expense record
-        var d = new Date()
-        var monthname = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const date = monthname[d.getMonth()] + "/" + d.getDate() + "/" + d.getFullYear();            
-        const { email, userId } = getState().auth.usrProfile;
-        const response = await expenses.post('/expenses', { ...formValues, email, userId, date}); //here we are taking all the objects inside formValues and adding the userId
-        dispatch(
-           {
-               type: CREATE_EXPENSE,
-               payload: response.data
+        var date = new Date()
+        const userId = getState().auth.usrProfile.userId;
+        const requestor = getState().auth.usrProfile.email;
+
+        const response = await pagame.post('/expenses/create', { ...formValues, requestor, userId, date }); //here we are taking all the objects inside formValues and adding the userId
+        dispatch({
+            type: CREATE_EXPENSE,
+            payload: response.data
         });
-        history.push('/'); //this is how we change routes without a user input
+        history.push('/');
+
     };
 }
 
-export const fetchExpenses = () => {   
+export const fetchExpenses = (userEmail) => {
     return async (dispatch) => {
-        const response = await expenses.get('/expenses');
+        const response = await pagame.get(`/expenses/${userEmail}/all`);
         dispatch(
             {
                 type: FETCH_EXPENSES,
@@ -63,7 +90,7 @@ export const fetchExpenses = () => {
 
 export const fetchExpense = (id) => {
     return async (dispatch) => {
-        const response = await expenses.get(`/expenses/${id}`);
+        const response = await pagame.get(`/expenses/${id}`);
         dispatch(
             {
                 type: FETCH_EXPENSE,
@@ -71,30 +98,5 @@ export const fetchExpense = (id) => {
             });
     };
 };
-
-//validate if email exists in our records
-export const getEmail = (formValues) =>{
-
-}
-
-export const createUser = (formValues) => {
-    //we need to set a handle on the response that we get form the post, we will be getting the record that was created
-    return async (dispatch, getState) => {
-        // const usrProfile = {
-        //     userId: profile.getId(),
-        //     fullName: profile.getName(),
-        //     email: profile.getEmail()
-        // }
-        //from google auth
-        const { usrProfile } = getState().auth;
-        const response = await expenses.post('/users', { ...formValues }, usrProfile); //here we are taking all the properties inside formValues and adding the userId
-        dispatch(
-            {
-                type: CREATE_EXPENSE,
-                payload: response.data
-            });
-        history.push('/'); //this is how we change routes without a user input
-    };
-}
 
 

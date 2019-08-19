@@ -3,18 +3,18 @@
     {
       "description": "Kidany own 50$",
       "amount": "50.00",
-      "email": "kidobv@gmail.com",
+      "requestor": "kidobv@gmail.com",
       "userId": "117636597251114231417",
-      "date": "Aug/13/2019",
+      "date": "2019-08-13T17:10:55.717Z",
       "requestee": "kidobv@gmail.com",
       "id": 1
     },
     {
       "description": "Amelia gimme 20",
       "amount": "20.00",
-      "email": "kidobv@gmail.com",
+      "requestor": "kidobv@gmail.com",
       "userId": "117636597251114231417",
-      "date": "Aug/13/2019",
+      "date": "2019-08-15T17:10:55.717Z",
       "requestee": "thisisnotamelia@gmail.com",
       "id": 2
     },
@@ -22,37 +22,55 @@
       "description": "Mika's pillow",
       "amount": "42",
       "requestee": "kidobv@gmail.com",
-      "email": "kidobv@gmail.com",
+      "requestor": "kidobv@gmail.com",
       "userId": "117636597251114231417",
-      "date": "Aug/14/2019",
+      "date": "2019-08-11T17:10:55.717Z",
       "id": 3
     },
     {
       "description": "Amelia paid publix on Sunday",
       "amount": "12",
       "requestee": "kidobv@gmail.com",
-      "email": "kidobv@gmail.com",
+      "requestor": "kidobv@gmail.com",
       "userId": "117636597251114231417",
-      "date": "Aug/14/2019",
+      "date": "2019-08-12T17:10:55.717Z",
       "id": 4
     },
     {
       "amount": "54",
       "description": "expensive ass drinks",
       "requestee": "kidobv@gmail.com",
-      "email": "kidobv@gmail.com",
+      "requestor": "kidobv@gmail.com",
       "userId": "117636597251114231417",
-      "date": "Aug/14/2019",
+      "date": "2019-08-14T17:10:55.717Z",
       "id": 5
     },
     {
       "amount": "50",
       "description": "test",
       "requestee": "kidobv@gmail.com",
-      "email": "kidobv@gmail.com",
+      "requestor": "kidobv@gmail.com",
       "userId": "117636597251114231417",
-      "date": "Aug/14/2019",
+      "date": "2019-08-15T17:10:55.717Z",
       "id": 6
+    },
+    {
+      "description": "Puertorrican delicious food",
+      "amount": "30",
+      "requestee": "kidobv@gmail.com",
+      "requestor": "kidobv@gmail.com",
+      "userId": "117636597251114231417",
+      "date": "2019-08-15T17:10:55.717Z",
+      "id": 7
+    },
+    {
+      "description": "Lego set",
+      "amount": "234",
+      "requestee": "kidobv@gmail.com",
+      "requestor": "kidobv@gmail.com",
+      "userId": "117636597251114231417",
+      "date": "2019-08-16T17:10:55.717Z",
+      "id": 8
     }
   ],
   "users": [

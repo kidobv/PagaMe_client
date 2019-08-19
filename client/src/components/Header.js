@@ -8,6 +8,8 @@ class Header extends React.Component {
 
     onSignOutClick = () => {//remember this.auth is a reference to the AuthInstance from gapi declared inside the then() method
         this.props.signOut();
+        
+        if (this.props.authInstance)
         this.props.authInstance.signOut();
     }
 
@@ -20,8 +22,6 @@ class Header extends React.Component {
     }
     renderLoggedNav() {
         return (this.props.isSignedIn ?
-            // <div className="right menu ">
-            //     <div className = "ui item">
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent">
@@ -52,18 +52,15 @@ class Header extends React.Component {
                 </button>
             </div> : null
         );
-
     }
 
     renderHeader() {
         return (
-            // <div className="ui secondary pointing menu">
-            //     {this.renderWelcome()}
-            //     {this.renderSignoutButton()}
-            // </div>
             <div>
                 <nav className="navbar navbar-expand-lg border-bottom bg-white fixed-top shadow-sm justify-content-between navbar-light">
-                    <h3 className="navbar-brand">PagaMe</h3>
+                    <Link to="/" >
+                        <h3 className="navbar-brand">PagaMe</h3>
+                    </Link>                    
                     {this.renderCollapseMenu()}  
                     {this.renderLoggedNav()}
                 </nav>

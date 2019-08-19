@@ -1,0 +1,13 @@
+Requirements left:
+-Delete expense from list
+
+-Display Totals 
+Component to display total amount of all expenses added by you, requested by you and requested from you
+OR by adding tabs in expenses history 
+
+-Pagination for ExpenseList
+-Sorting and search for the ExpenseList table
+-Password reset
+-Notification for Expense request
+-Venmo/paypal integration
+-Add loading Gif for better UX

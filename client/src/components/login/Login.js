@@ -2,7 +2,7 @@ import React from 'react'
 import history from '../../history'
 import { connect } from "react-redux";
 import LoginForm from "./LoginForm"
-import { signIn, getEmail } from "../../actions";
+import { signIn, authUser } from "../../actions";
 
 
 class Login extends React.Component {
@@ -11,6 +11,10 @@ class Login extends React.Component {
         if (this.props.isSignedIn === true) {
             history.push("/")
         }
+    }
+
+    onSubmit = (formValues) =>{
+        this.props.authUser(formValues);
     }
 
     render() {
@@ -33,4 +37,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, { signIn, getEmail })(Login)
+export default connect(mapStateToProps, { signIn, authUser })(Login)

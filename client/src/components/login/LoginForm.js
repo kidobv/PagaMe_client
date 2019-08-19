@@ -1,6 +1,7 @@
 import React from 'react'
 import GoogleAuth from './GoogleAuth'
 import { Field, reduxForm } from 'redux-form'
+import { Link } from 'react-router-dom'
 
 
 class LoginForm extends React.Component {
@@ -8,9 +9,12 @@ class LoginForm extends React.Component {
     renderError({ error, touched }) {//distructured parameters from meta
         if (touched && error) {
             return (
-                <div className="ui error message">
-                    <div className="header">{error}</div>
+                <div className="row">
+                    <div className="ui error message">
+                        <div className="header">{error}</div>
+                    </div>
                 </div>
+                
             );
         }
     }
@@ -32,7 +36,7 @@ class LoginForm extends React.Component {
         );
     };
 
-    onSubmit = (formValues) => {
+    onLoginSubmit = (formValues) => {
         this.props.onSubmit(formValues);
     }
 
@@ -45,7 +49,7 @@ class LoginForm extends React.Component {
                         Log-in to your account
                     </div>
                 </h2>
-                <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui large form error">
+                <form onSubmit={this.props.handleSubmit(this.onLoginSubmit)} className="ui form error">
                     <div className="ui stacked segment">
                         <div className="field">
                             <Field name="email" type="email" icon="user" component={this.renderInput} placeholder="E-mail address" />
@@ -54,16 +58,15 @@ class LoginForm extends React.Component {
                             <Field name="password" type="password" icon="lock" component={this.renderInput} placeholder="Password" />
                         </div>
                     </div>
-                    <div className="ui fluid large teal submit button">Login</div> 
+                    <button className="ui fluid large teal submit button">Login</button> 
                 </form>
                 <div className="ui message">
-                    Don't have an account? <a href="#"> Sign Up</a>
+                    Don't have an account? <Link to="/signup"> Sign Up</Link>
                 </div>
                 <div className="ui horizontal divider">
                     Or
                 </div>
-                <div className="row justify-content-center"><GoogleAuth/></div>
-                
+                <div className="row justify-content-center"><GoogleAuth/></div>                
             </div>
 
         );
@@ -75,10 +78,10 @@ const validate = (formValues) => {
     //redux form looks at the name property if an errors property as the same name as the field then Redux form is going to take that error message and pass it into the renderInput function
     //basically the callback function that that specific field is calling and passing the fromProps
     if (!formValues.email) {
-        errors.title = "You must enter a valid email address ";
+        errors.email = "*";
     }
     if (!formValues.password) {
-        errors.description = "You must enter your password";
+        errors.password = "*";
     }
     return errors
 }

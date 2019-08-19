@@ -3,6 +3,8 @@ import history from '../../history'
 import { connect } from "react-redux";
 import { signIn, signOut } from "../../actions";
 
+const config = require('../../config'); 
+
 class GoogleAuth extends React.Component {
 
     componentDidMount() {//we only want to load the google auth library when this component is rendered
@@ -11,23 +13,22 @@ class GoogleAuth extends React.Component {
         //load only allows us to get a notification" about the call being done with a callback function, however
         //init() returns a promise so we don't need to use a callback function we can use the method .then() from the promise object
         window.gapi.load('client:auth2', () => {
+            //add loading gif
             window.gapi.client.init({
-                clientId: '461114790135-uqibl32l9f2fps35en1asdl45qkmafo2.apps.googleusercontent.com',
+                clientId: config.GOOGLE_CLIENTID,
                 scope: 'profile'
             }).then(() => {
                 //here the gapi process is done and we can save a reference to the Auth object in the component class using this
                 this.authInstance = window.gapi.auth2.getAuthInstance();
                 //this.setState({ isSignedIn: this.authInstance.isSignedIn.get() });//we can look at gapi documentation so look at more methods
                 this.onAuthChange(this.authInstance.isSignedIn.get());//we can look at gapi documentation to look at more methods
-                this.authInstance.isSignedIn.listen(this.onAuthChange);//callback function reference
-                console.log("from gapi " + this.authInstance)
+                this.authInstance.isSignedIn.listen(this.onAuthChange);//callback function reference                
             });
         });
     }
     //since this is a callback function we need to declare it as an arrow function so that it's context is bound to the component
     onAuthChange = (isSignedIn) => { // isSignedIn comes from props    
         if(isSignedIn){
-            console.log("from onAuthCHnage " + isSignedIn)
             this.props.signIn(this.authInstance);
             history.push("/")
         } else{

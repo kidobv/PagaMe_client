@@ -1,5 +1,7 @@
 import React from 'react';
+import pagame from '../../apis/pagame'
 import { Field, reduxForm } from 'redux-form'
+import swal from 'sweetalert'
 
 class ExpenseRequestForm extends React.Component {
 
@@ -21,19 +23,22 @@ class ExpenseRequestForm extends React.Component {
         return (
             <div className={className}>
                 <label>{formProps.label}</label>
-                <input {...formProps.input} />
+                <input {...formProps.input} type={formProps.type}/>
                 {/* meta property from redux form has the error messages for each field */}
                 {this.renderError(formProps.meta)}
             </div>
         );
     };
 
-    onExpenseSubmit = (formValues) => {
-        console.log(formValues)
-        this.props.onSubmit(formValues);
-    }
-    onExpenseRequest = () => {
-
+    //Need to verify that requestee email address is valid
+    onExpenseSubmit = async (formValues) => {
+        const response = await pagame.get(`/users/${formValues.requestee}`);
+        if(response.data.email){
+            this.props.onSubmit(formValues);
+        }
+        else{
+            swal("Email not found", response.data, "warning");
+        }
     }
 
     render() {
@@ -42,7 +47,7 @@ class ExpenseRequestForm extends React.Component {
                 <form onSubmit={this.props.handleSubmit(this.onExpenseSubmit)} className="ui form error">
                     <Field name="description" component={this.renderInput} label="Enter Description" />
                     <Field name="amount" component={this.renderInput} label="Enter Amount" />                    
-                    <Field name="requestee" component={this.renderInput} label="Enter Requestee email" />
+                    <Field name="requestee" type="email" component={this.renderInput} label="Enter Requestee email" />
                     <button className="ui positive button">Submit Request</button>                    
                 </form>
             </div>
