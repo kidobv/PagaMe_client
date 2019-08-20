@@ -1,5 +1,5 @@
 Requirements left:
--Delete expense from list
+-Use React tables or any other table package
 
 -Display Totals 
 Component to display total amount of all expenses added by you, requested by you and requested from you

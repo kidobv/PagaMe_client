@@ -1,20 +1,35 @@
 import React from 'react';
 import history from '../../history'
+import swal from 'sweetalert'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { fetchExpenses } from '../../actions'
+import { fetchExpenses, deleteExpense } from '../../actions'
 
 class ExpenseList extends React.Component {
 
     componentDidMount = () => {
         //Makes sure to only fetch expenses when the user is signed in and the expenses list hasn't been loaded yet
-        if (this.props.isSignedIn === true ) {
+        if (this.props.isSignedIn === true) {
             if (this.props.expenses.length === 0)
-            this.props.fetchExpenses(this.props.usrProfile.email);
+                this.props.fetchExpenses(this.props.usrProfile.email);
         }
         else {
             history.push('/login');
         }
+    }
+    handleExpenseDelete = (expenseId) => {
+        swal({
+            title: "Are you sure?",
+            text: "This will permanenlty delete the record",
+            icon: "warning",
+            buttons: ["cancel", "Yes"],
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    this.props.deleteExpense(expenseId, this.props.usrProfile.email);                    
+                }
+            });
     }
 
     renderList() {
@@ -27,7 +42,18 @@ class ExpenseList extends React.Component {
                     <td>{expense.description}</td>
                     <td><h4>${expense.amount}</h4></td>
                     <td>{date}</td>
-                    <td>{expense.requestee}</td>
+                    <td>
+                        <div className="row">
+                            <div className='col-sm-8'>
+                                {expense.requestee}
+                            </div>
+                            <div className='col-sm-4'>
+                                <button onClick={() => { this.handleExpenseDelete(expense._id) }}
+                                    className="mini ui inverted red button" style={{ float: 'right' }}>Delete</button>
+                            </div>
+                        </div>
+
+                    </td>
                 </tr>
             );
         });
@@ -81,4 +107,4 @@ const mapStateToProps = state => {
     }
 }
 //using connect here will pass the state object from the redux store as an argument to the mapStateToProps
-export default connect(mapStateToProps, { fetchExpenses })(ExpenseList);
+export default connect(mapStateToProps, { fetchExpenses, deleteExpense })(ExpenseList);

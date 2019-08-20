@@ -4,13 +4,12 @@ import swal from 'sweetalert'
 
 import {
     SIGN_IN, SIGN_OUT, CREATE_EXPENSE, FETCH_EXPENSES,
-    FETCH_EXPENSE
+    FETCH_EXPENSE, DELETE_EXPENSE
 } from "./types";
 
 
 export const signIn = (authInstance) => {
     //needs to handle case where profile doesn't load and authInstance is null
-
     const profile = authInstance.currentUser.get().getBasicProfile()
     const usrProfile = {
         userId: profile.getId(),
@@ -87,6 +86,27 @@ export const fetchExpenses = (userEmail) => {
             });
     };
 }
+
+export const deleteExpense = (id) => {
+    console.log(id)
+    return async (dispatch) => {
+        try{
+            const response = await pagame.delete(`/expenses/${id}/delete`);
+            dispatch(
+                {
+                    type: DELETE_EXPENSE,
+                    payload: response.data._id //passing the ID of the deleted record in the response to omit in our reducer
+                });
+            swal("Successfully Deleted!", {
+                icon: "success",
+            });
+        }catch(error){
+            swal("Error while trying to delete", {
+                icon: "error",
+            });
+        }        
+    };
+};
 
 export const fetchExpense = (id) => {
     return async (dispatch) => {

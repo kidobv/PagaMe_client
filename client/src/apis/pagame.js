@@ -1,8 +1,8 @@
 import axios from 'axios'
 //3001 port for json-server 
-//3030 port for MongoDB at MongoDB atlas
+//3000 port for NodeJS server with MongoDB atlas
 export default axios.create({
-    baseURL: 'http://localhost:3030',
+    baseURL: 'http://localhost:3000',
     headers: {
         'Content-Type': 'application/json'
     }
