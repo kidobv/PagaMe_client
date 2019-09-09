@@ -11,7 +11,7 @@ OR by adding tabs in expenses history.
 -Sorting and search for the ExpenseList table
 -Add loading Gif for better UX
 
-Account related requriements
+Account related requirements
 -Cookies or JWT for security
 -Password reset
 -Notification for Expense request
