@@ -9,7 +9,7 @@ class ExpenseList extends React.Component {
 
     componentWillMount = () => {
         //Makes sure to only fetch expenses when the user is signed in and the expenses list hasn't been loaded yet
-        if (this.props.isSignedIn === true) {
+        if (this.props.isSignedIn === true) {            
             if (this.props.expenses.length === 0)
                 this.props.fetchExpenses(this.props.usrProfile.email);
         }

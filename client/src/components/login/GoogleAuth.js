@@ -28,12 +28,9 @@ class GoogleAuth extends React.Component {
     }
     //since this is a callback function we need to declare it as an arrow function so that it's context is bound to the component
     onAuthChange = (isSignedIn) => { // isSignedIn comes from props    
-        if(isSignedIn){
-            this.props.signIn(this.authInstance);
-            history.push("/");
-                        
+        if(isSignedIn){                    
+            this.props.signIn(this.authInstance);   
         } else{            
-            this.props.signOut();
             history.push('/login');
         }
     }

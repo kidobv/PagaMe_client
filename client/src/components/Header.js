@@ -9,17 +9,13 @@ class Header extends React.Component {
 
     onSignOutClick = () => {//remember this.authInstance is a reference to the AuthInstance from gapi declared inside the then() method
         //check if we are 
-        console.log("sign out button")
+        this.props.signOut();
         if (this.props.authInstance){
-            console.log("sign out Google")
             this.props.authInstance.signOut();
         }  
         else{
-            this.props.signOut();
             history.push('/login');
-            console.log("sign out Regular")
-        }  
-        
+        }          
     }
 
     renderCollapseMenu() {

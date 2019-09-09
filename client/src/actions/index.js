@@ -7,26 +7,36 @@ import {
     FETCH_EXPENSE, DELETE_EXPENSE
 } from "./types";
 
-
 export const signIn = (authInstance) => {
     //needs to handle case where profile doesn't load and authInstance is null
-    const profile = authInstance.currentUser.get().getBasicProfile()
-    const usrProfile = {
-        userId: profile.getId(),
-        fullName: profile.getName(),
-        email: profile.getEmail()
-    }    
-    return {
-        type: SIGN_IN,
-        payload: usrProfile,
-        instance: authInstance
-    };
+    return async (dispatch) => {
+       const response = await pagame.post('/users/gauth', { email: authInstance.currentUser.get().getBasicProfile().getEmail() })
+        const profile = authInstance.currentUser.get().getBasicProfile()
+       
+        if(response){
+            const usrProfile = {
+                userId: profile.getId(),
+                fullName: profile.getName(),
+                email: profile.getEmail()
+            }  
+            dispatch({
+                type: SIGN_IN,
+                payload: usrProfile,
+                instance: authInstance
+            });
+            history.push("/");  
+        }
+        else {
+            //swal to handle error
+            swal("Authentication Error", "There was an error when trying to Log in please try again.", "warning");
+        }
+    }           
 };
 
 // Authenticate User in Backend
 export const authUser = (formValues) => {
     return async (dispatch) => {
-        const response = await pagame.post('/users/find', { ...formValues })
+        const response = await pagame.post('/users/auth', { ...formValues })
         const profile = response.data
         if (response.data.fullName) {
             const usrProfile = {
@@ -49,8 +59,12 @@ export const authUser = (formValues) => {
 }
 
 export const signOut = () => {   
-    return {
-        type: SIGN_OUT
+    return async (dispatch) => {
+        await pagame.get('/users/logout');
+        dispatch(
+            {
+                type: SIGN_OUT
+            });
     };
 };
 
@@ -58,7 +72,7 @@ export const signOut = () => {
 export const createExpense = (formValues) => {
     //we need to set a handle on the response that we get form the post, we will be getting the record that was created
     return async (dispatch, getState) => {
-        //tweek to remove posible $ entires
+        //tweak to remove possible $ entires
         formValues.amount = formValues.amount.replace("$", "");
         //format the date to be added to the expense record
         var date = new Date()
