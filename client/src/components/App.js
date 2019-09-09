@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
 import ExpenseCreate from "./expenses/ExpenseCreate";
 import ExpenseList from "./expenses/ExpenseList";
 import Login from "./login/Login"
@@ -16,12 +16,18 @@ const App = () => {
                     <Header />
                 </div>
                 <div className="container">
-                    {/* exact prop by itself means exact = {ture} */}                    
-                    <Route path="/login" exact component={Login} />
-                    <Route path="/signup" exact component={Signup} />
-                    <Route path="/" exact component={ExpenseList} />
-                    <Route path="/expenses/add" exact component={ExpenseCreate} />
-                    <Route path="/expenses/request" exact component={ExpenseCreate} />
+                    <Switch>
+                        {/* exact prop by itself means exact = {ture} */}
+                        <Route path="/login" exact component={Login} />
+                        <Route path="/signup" exact component={Signup} />
+                        <Route path="/" exact component={ExpenseList} />
+                        <Route path="/expense/add" exact component={ExpenseCreate} />
+                        <Route path="/expense/request" exact component={ExpenseCreate} />
+                        {/* default route */}
+                        <Route component={ExpenseList} />
+                        {/* <Route path='*' exact={true} component={ExpenseList} /> */}
+                    </Switch>
+                   
                 </div>            
            
             </Router>

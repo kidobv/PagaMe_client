@@ -7,7 +7,7 @@ import { fetchExpenses, deleteExpense } from '../../actions'
 
 class ExpenseList extends React.Component {
 
-    componentDidMount = () => {
+    componentWillMount = () => {
         //Makes sure to only fetch expenses when the user is signed in and the expenses list hasn't been loaded yet
         if (this.props.isSignedIn === true) {
             if (this.props.expenses.length === 0)
@@ -42,17 +42,17 @@ class ExpenseList extends React.Component {
                     <td>{expense.description}</td>
                     <td><h4>${expense.amount}</h4></td>
                     <td>{date}</td>
+                    <td>{expense.requestor}</td>
                     <td>
                         <div className="row">
-                            <div className='col-sm-8'>
-                                {expense.requestee}
+                            <div className='col-lg-8 col-md-12'>
+                                <p>{expense.requestee}</p>
                             </div>
-                            <div className='col-sm-4'>
+                            <div className='col-lg-4 col-md-12'>
                                 <button onClick={() => { this.handleExpenseDelete(expense._id) }}
                                     className="mini ui inverted red button" style={{ float: 'right' }}>Delete</button>
                             </div>
                         </div>
-
                     </td>
                 </tr>
             );
@@ -64,11 +64,11 @@ class ExpenseList extends React.Component {
             return (
                 <div style={{ textAlign: 'right', marginBottom: '15px' }}>
                     <div className="ui buttons">
-                        <Link to="/expenses/add" className="ui  button primary">
+                        <Link to="/expense/add" className="ui  button primary">
                             Add Expense
                         </Link>
                         <div className="or"></div>
-                        <Link to="/expenses/request" className="ui positive button">
+                        <Link to="/expense/request" className="ui positive button">
                             Request Expense
                         </Link>
                     </div>
@@ -78,8 +78,22 @@ class ExpenseList extends React.Component {
         }
     };
 
+    renderWelcome() {
+        return (
+            this.props.expenses.length === 0 ?
+            <div className="ui floating message" style={{ marginTop: '10px' }}>
+                <i onClick={this.onBannerClose} className="close icon"></i>
+                <div className="header">
+                    Welcome to PagaMe!...
+            </div>
+                Add notes of expenses you would like to keep track of or request one from another PagaMe user.
+        </div>:null
+        );
+    }
+
     render() {
         return <div>
+            {this.renderWelcome()}
             <h2>Expenses History</h2>
             <table className="ui celled padded table">
                 <thead>
@@ -87,10 +101,11 @@ class ExpenseList extends React.Component {
                         <th>Description</th>
                         <th>Amount</th>
                         <th>Date</th>
+                        <th>Requestor</th>
                         <th>Requestee</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody>                    
                     {this.renderList()}
                 </tbody>
             </table>

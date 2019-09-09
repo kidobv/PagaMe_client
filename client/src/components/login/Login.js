@@ -1,5 +1,4 @@
 import React from 'react'
-import history from '../../history'
 import { connect } from "react-redux";
 import LoginForm from "./LoginForm"
 import { signIn, authUser } from "../../actions";
@@ -7,17 +6,12 @@ import { signIn, authUser } from "../../actions";
 
 class Login extends React.Component {
 
-    componentDidMount() {
-        if (this.props.isSignedIn === true) {
-            history.push("/")
-        }
-    }
-
-    onSubmit = (formValues) =>{
+     onSubmit = (formValues) =>{
         this.props.authUser(formValues);
     }
 
     render() {
+        
         return (
             <div className="row justify-content-md-center" style={{marginTop:'20px'}}>
                 <div className="col-md-8 col-sm-10 col-xs-12">

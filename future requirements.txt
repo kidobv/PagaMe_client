@@ -1,13 +1,18 @@
 Requirements left:
--Use React tables or any other table package
 
+Important: handle route navigation, use default to home instead of login and signing out when unresolved
+
+UI related requirements
+-Use React tables or any other table package
 -Display Totals 
 Component to display total amount of all expenses added by you, requested by you and requested from you
-OR by adding tabs in expenses history 
-
+OR by adding tabs in expenses history.
 -Pagination for ExpenseList
 -Sorting and search for the ExpenseList table
+-Add loading Gif for better UX
+
+Account related requriements
+-Cookies or JWT for security
 -Password reset
 -Notification for Expense request
 -Venmo/paypal integration
--Add loading Gif for better UX

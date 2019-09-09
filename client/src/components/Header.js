@@ -3,14 +3,23 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
 import { signOut } from "../actions";
+import history from '../history'
 
 class Header extends React.Component {
 
-    onSignOutClick = () => {//remember this.auth is a reference to the AuthInstance from gapi declared inside the then() method
-        this.props.signOut();
+    onSignOutClick = () => {//remember this.authInstance is a reference to the AuthInstance from gapi declared inside the then() method
+        //check if we are 
+        console.log("sign out button")
+        if (this.props.authInstance){
+            console.log("sign out Google")
+            this.props.authInstance.signOut();
+        }  
+        else{
+            this.props.signOut();
+            history.push('/login');
+            console.log("sign out Regular")
+        }  
         
-        if (this.props.authInstance)
-        this.props.authInstance.signOut();
     }
 
     renderCollapseMenu() {
@@ -33,14 +42,14 @@ class Header extends React.Component {
                     </li>
                     <li className="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent">
                         <h5 className="nav-link">
-                            <Link to="/expenses/add" >
+                            <Link to="/expense/add" >
                                 Add Expense
                             </Link>
                         </h5>
                     </li>
                     <li className="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent">
                         <h5 className="nav-link">
-                            <Link to="/expenses/request" >
+                            <Link to="/expense/request" >
                                 Request Expense
                             </Link>
                         </h5>

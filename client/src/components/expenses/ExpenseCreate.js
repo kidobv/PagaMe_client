@@ -8,13 +8,13 @@ import ExpenseRequestForm from './ExpenseRequestForm';
 
 class ExpenseCreate extends React.Component {
 
-    componentDidMount = () => {
-        if (this.props.isSignedIn !== true) {           
-            history.push('/login');
+    componentWillMount() {
+        if (this.props.isSignedIn !== true) {
+            history.push("/login")
         }
     }
   
-    onSubmit = (formValues) => {
+    onSubmit = (formValues) => {        
         if(formValues.requestee){
             this.props.createExpense(formValues);
         } 
@@ -25,17 +25,17 @@ class ExpenseCreate extends React.Component {
     }
 
     render() {
-        return (this.props.location.pathname === "/expenses/add" ?
-            <div>
-                <h3>Add an Expense</h3>
-                <ExpenseAddForm onSubmit={this.onSubmit} />
-            </div> 
-            :
-            <div>
-                <h3>Request an Expense</h3>
-                <ExpenseRequestForm onSubmit={this.onSubmit} />
-            </div>            
-        );
+            return (this.props.location.pathname === "/expense/add" ?
+                <div>
+                    <h3>Add an Expense</h3>
+                    <ExpenseAddForm onSubmit={this.onSubmit} />
+                </div>
+                :
+                <div>
+                    <h3>Request an Expense</h3>
+                    <ExpenseRequestForm onSubmit={this.onSubmit} />
+                </div>
+            );
     };
 };
 const mapStateToProps = state => {

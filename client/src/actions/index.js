@@ -15,7 +15,7 @@ export const signIn = (authInstance) => {
         userId: profile.getId(),
         fullName: profile.getName(),
         email: profile.getEmail()
-    }
+    }    
     return {
         type: SIGN_IN,
         payload: usrProfile,
@@ -23,7 +23,7 @@ export const signIn = (authInstance) => {
     };
 };
 
-// Authentivate User in Backend
+// Authenticate User in Backend
 export const authUser = (formValues) => {
     return async (dispatch) => {
         const response = await pagame.post('/users/find', { ...formValues })
@@ -48,8 +48,7 @@ export const authUser = (formValues) => {
     }
 }
 
-export const signOut = () => {
-    history.push('/login');
+export const signOut = () => {   
     return {
         type: SIGN_OUT
     };
@@ -88,7 +87,6 @@ export const fetchExpenses = (userEmail) => {
 }
 
 export const deleteExpense = (id) => {
-    console.log(id)
     return async (dispatch) => {
         try{
             const response = await pagame.delete(`/expenses/${id}/delete`);

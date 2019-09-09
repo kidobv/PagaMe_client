@@ -1,7 +1,7 @@
 import React from 'react'
-import history from '../../history'
 import { connect } from "react-redux";
 import { signIn, signOut } from "../../actions";
+import history from '../../history'
 
 const config = require('../../config'); 
 
@@ -30,26 +30,24 @@ class GoogleAuth extends React.Component {
     onAuthChange = (isSignedIn) => { // isSignedIn comes from props    
         if(isSignedIn){
             this.props.signIn(this.authInstance);
-            history.push("/")
-        } else{
+            history.push("/");
+                        
+        } else{            
             this.props.signOut();
-            this.authInstance.signOut();
-            history.push("/login")
+            history.push('/login');
         }
     }
 
-    onSignInClick = () =>{//remember this.auth is a reference to the AuthInstance from gapi declared inside the then() method
+    onSignInClick = () => {//remember this.authInstance is a reference to the AuthInstance from gapi declared inside the then() method
         this.authInstance.signIn();
     }
 
-    onSignOutClick = () => {//remember this.auth is a reference to the AuthInstance from gapi declared inside the then() method
+    onSignOutClick = () => {//remember this.authInstance is a reference to the AuthInstance from gapi declared inside the then() method
         this.authInstance.signOut();
     }
 
     renderAuthButton() {
-        if (this.props.isSignedIn === null) {
-            return null;
-        } else if (!this.props.isSignedIn) {
+         if (this.props.isSignedIn !== true) {
             return ( 
                 <button onClick={this.onSignInClick} className="ui red google button">
                     <i className="google icon" />
@@ -58,7 +56,7 @@ class GoogleAuth extends React.Component {
             );
         } 
         else {
-            return (//remeber!! when passing callback functions you want to pass a reference to it and not the call
+            return (//remember!! when passing callback functions you want to pass a reference to it and not the call
                 <button onClick={this.onSignOutClick} className="ui red google button">
                     <i className="google icon" />
                     Sign Out

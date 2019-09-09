@@ -10,14 +10,14 @@ import { authUser } from "../../actions";
 
 class Signup extends React.Component {
 
-    componentDidMount() {
+    componentWillMount() {
         if (this.props.isSignedIn === true) {
             history.push("/")
         }
     }
 
     onSubmit = async (formValues) =>{
-        //remove re_password since it's only needed for validatioin
+        //remove re_password since it's only needed for validation
         if(formValues.re_password){
             delete formValues.re_password
         }
@@ -37,7 +37,7 @@ class Signup extends React.Component {
         }        
     }
 
-    render() {
+    render() {        
         return (
             <div className="row justify-content-md-center" style={{ marginTop: '20px' }}>
                 <div className="col-md-8 col-sm-10 col-xs-12">
