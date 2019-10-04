@@ -8,7 +8,7 @@ export default (state = INITIAL_STATE, action) =>{
         case CREATE_EXPENSE:
             return { ...state, [action.payload._id]: action.payload }; 
         case FETCH_EXPENSES:
-            return {..._.mapKeys(action.payload, '_id')};
+            return {...state, ..._.mapKeys(action.payload, '_id')};
         case FETCH_EXPENSE:
             return {...state, [action.payload._id]: action.payload};
         case DELETE_EXPENSE:
